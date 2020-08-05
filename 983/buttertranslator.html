@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Butter Creature Translator</title>
+
+		<link rel="stylesheet" href="./styles.css" />
+		<link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap" rel="stylesheet"> 
+	</head>
+
+
+
+
+	<body>
+
+		<header>
+			<h1> Butter Creature Translator </h1>
+		</header>
+
+		<div>
+			<label for="text-input">Input Text:</label>
+			<br>
+			<textarea id="text-input"></textarea>
+		</div>
+
+		<div>
+			<label for="settings">Mode:</label>
+			<select name="settings" id="settings">
+				<option value="creature">To Butter Creature</option>
+				<option value="human">To English</option>
+			</select>
+		</div>
+
+
+		<div>
+			<label for="text-output">Output Text:</label>
+			<br>
+			<textarea id="text-output"></textarea>
+		</div>
+
+
+	</body>
+
+	<script type="text/javascript">
+		
+		console.log("Test!");
+
+		const inputArea = document.getElementById("text-input");
+		const outputArea = document.getElementById("text-output");
+		const mode = document.getElementById("settings");
+
+
+		inputArea.oninput = function() {
+
+			if(mode.value == "creature")
+			{
+				outputArea.value = translateTextToCreature(inputArea.value);
+			}
+			else
+			{
+				outputArea.value = translateTextToHuman(inputArea.value);
+			}
+		};
+
+
+
+		function translateTextToCreature(string) {
+
+			const input = string.toLowerCase();
+			var output = "";
+
+			for(var i = 0; i < input.length; i++) {
+				output += getCreatureChar(input.charAt(i));
+			}
+
+
+
+
+
+			return output;
+		}
+
+		function translateTextToHuman(string) {
+			const input = string;
+			var output = "";
+
+			for(var i = 0; i < input.length; i += 0) {
+				const char = getEnglishChars(i, input);
+				output += char;
+				i += getEnglishCharsLength(i, input);
+			}
+
+			return output;
+		}
+
+
+
+
+
+		function getCreatureChar(char) {
+			switch(char) {
+					case "a":
+						return "bb";
+
+					case "b":
+						return "B";
+
+					case "c":
+						return "tr";
+
+					case "d":
+						return "et";
+
+					case "e":
+						return "E";
+
+					case "f":
+						return "tb";
+
+					case "g":
+						return "eu";
+
+					case "h":
+						return "bu";
+
+					case "i":
+						return "ur";
+
+					case "j":
+						return "br";
+
+					case "k":
+						return "tr";
+
+					case "l":
+						return "rt";
+
+					case "m":
+						return "te";
+
+					case "n":
+						return "ter";
+
+					case "o":
+						return "uu";
+
+					case "p":
+						return "be";
+
+					case "q":
+						return "tu";
+
+					case "r":
+						return "R";
+
+					case "s":
+						return "rb";
+
+					case "t":
+						return "T";
+
+					case "u":
+						return "U";
+
+					case "v":
+						return "re";
+
+					case "w":
+						return "ru";
+
+					case "x":
+						return "tt";
+
+					case "y":
+						return "ee";
+
+					case "z":
+						return "ut";
+				}
+			return char;
+		}
+
+
+
+
+
+		function getEnglishChars(index, wholeString) {
+
+			// Get one char translations
+			switch(wholeString.charAt(index)) {
+				case "B":
+					return "b";
+
+				case "E":
+					return "e";
+
+				case "R":
+					return "r";
+
+				case "T":
+					return "t";
+
+				case "U":
+					return "u";
+			}
+
+
+
+			if(index + 2 < wholeString.length) {
+				// Get three char translations
+				switch(wholeString.substring(index, index + 3)) {
+					case "ter":
+						return "n";
+				}
+			}
+
+
+
+			if(index + 1 >= wholeString.length) {
+				return " ";
+			}
+
+			// Get two char translations
+			switch(wholeString.substring(index, index + 2)) {
+				case "bb":
+					return "a";
+
+				// this can be c or k
+				case "tr":
+					return "k";
+
+				case "et":
+					return "d";
+
+				case "tb":
+					return "f";
+
+				case "eu":
+					return "g";
+
+				case "bu":
+					return "h";
+
+				case "ur":
+					return "i";
+
+				case "br":
+					return "j";
+
+				case "rt":
+					return "l";
+
+				case "te":
+					return "m";
+
+				case "uu":
+					return "o";
+
+				case "be":
+					return "p";
+
+				case "tu":
+					return "q";
+
+				case "rb":
+					return "s";
+
+				case "re":
+					return "v";
+
+				case "ru":
+					return "w";
+
+				case "tt":
+					return "x";
+
+				case "ee":
+					return "y";
+
+				case "ut":
+					return "z";
+			}
+
+			
+
+			
+
+
+
+
+
+			return wholeString.charAt(index);
+		}
+
+
+		function getEnglishCharsLength(index, wholeString) {
+
+			// Get one char translations
+			switch(wholeString.charAt(index)) {
+				case "B":
+					return 1;
+
+				case "E":
+					return 1;
+
+				case "R":
+					return 1;
+
+				case "T":
+					return 1;
+
+				case "U":
+					return 1;
+			}
+
+
+
+
+			if(index + 2 < wholeString.length) {
+				// Get three char translations
+				switch(wholeString.substring(index, index + 3)) {
+					case "ter":
+						return 3;
+				}
+			}
+
+
+
+			if(index + 1 >= wholeString.length) {
+				return 1;
+			}
+
+			// Get two char translations
+			switch(wholeString.substring(index, index + 2)) {
+				case "bb":
+					return 2;
+
+				// this can be c or k
+				case "tr":
+					return 2;
+
+				case "et":
+					return 2;
+
+				case "tb":
+					return 2;
+
+				case "eu":
+					return 2;
+
+				case "bu":
+					return 2;
+
+				case "ur":
+					return 2;
+
+				case "br":
+					return 2;
+
+				case "rt":
+					return 2;
+
+				case "te":
+					return 2;
+
+				case "uu":
+					return 2;
+
+				case "be":
+					return 2;
+
+				case "tu":
+					return 2;
+
+				case "rb":
+					return 2;
+
+				case "re":
+					return 2;
+
+				case "ru":
+					return 2;
+
+				case "tt":
+					return 2;
+
+				case "ee":
+					return 2;
+
+				case "ut":
+					return 2;
+			}
+
+			
+
+			
+
+
+
+
+
+			return 1;
+		}
+
+
+
+
+
+
+
+
+
+	</script>
+
+
+</html>
