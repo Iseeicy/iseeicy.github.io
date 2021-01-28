@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="./styles.css">
+	<link rel="stylesheet" type="text/css" href="bonus-points-styles.css">
+</head>
+
+<body>
+	<h1>Bonus Points</h1>
+
+
+
+	<div id="points-container">
+
+	</div>
+
+
+
+	<script type="text/javascript">
+
+		// Generic Lerp Function
+		function lerp (start, end, amt) {
+			return (1-amt)*start+amt*end
+		}
+
+
+		const containerParentElement = document.getElementById("points-container");
+
+		// Create user data
+		var users = {};
+		users["ButterAleks"] = 3;
+		users["Laserpulse"] = 4;
+		users["marbles-box"] = 8;
+		users["NightmareFluid"] = 7;
+		users["PurpGurp"] = 3;
+
+
+
+		// Convert to array
+		var usersArray = Array.from(Object.entries(users));
+		// Sort the array by bonus points
+		usersArray = usersArray.sort((a, b) => a[1] < b[1]);
+
+
+		const maxFontSize = 28;
+		const minFontSize = 10;
+
+		var minPoints = usersArray[0][1];
+		var maxPoints = usersArray[0][1];
+
+		// Get the minimum and maximum point values in the
+		// collection
+		for(const [username, pointValue] of usersArray) {
+			if(pointValue < minPoints) {
+				minPoints = pointValue;
+			}
+
+			if(pointValue > maxPoints) {
+				maxPoints = pointValue;
+			}
+		}
+
+
+
+
+		var counter = 0;
+
+		// Create HTML elements
+		for(const [username, pointValue] of usersArray) {
+			const containerElement = document.createElement("div");
+			containerElement.className = "point-bubble";
+
+			const nameElement = document.createElement("h1");
+			nameElement.appendChild(document.createTextNode(username));
+
+			const pointElement = document.createElement("h2");
+			pointElement.appendChild(document.createTextNode(pointValue));
+
+			containerElement.appendChild(nameElement);
+			containerElement.appendChild(pointElement);
+			containerParentElement.appendChild(containerElement);
+
+
+
+			// Apply scaling
+
+			const scale = (pointValue - minPoints) / (maxPoints - minPoints);
+			const fontSize = lerp(minFontSize, maxFontSize, scale);
+
+			containerElement.style["font-size"] = `${fontSize}px`
+			containerElement.style["animation-delay"] = -0.2 * counter + "s";
+
+
+
+
+			counter += 1;
+		}
+	</script>
+</body>
+
+</html>

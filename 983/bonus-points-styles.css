@@ -1,0 +1,58 @@
+
+
+
+#points-container {
+	margin: 10px;
+	padding: 20px;
+	border-style: dashed;
+}
+
+
+.point-bubble {
+	margin: auto;
+	padding: 10px;
+	width: 400px;
+	
+	text-align: center;
+	font-size: 20px;
+
+	
+
+	
+	animation-name: pointsIdle;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	
+}
+
+.point-bubble h1 {
+	margin: auto;
+	color: cyan;
+	display: inline-block;
+	transition-duration: 0.2s;
+}
+
+.point-bubble h1:hover {
+	color: yellow;
+
+	transition-duration: 0.2s;
+}
+
+.point-bubble h2 {
+	margin: auto;
+	color: magenta;
+}
+
+
+
+@keyframes pointsIdle {
+	0% { transform: rotateZ(-2deg); }
+	100% { transform: rotateZ(2deg); }
+}
+
+@keyframes pointsHover {
+	0% { transform: rotateZ(-2deg); }
+	100% { transform: rotateZ(2deg); }
+}
