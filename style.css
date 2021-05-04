@@ -67,7 +67,11 @@ a:active
 	    transform: translate(-50%, -50%);
 }
 
-
+#front-video
+{
+  width: 1024px;
+  height: 576px;
+}
 
 
 
